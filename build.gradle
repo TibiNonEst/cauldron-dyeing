@@ -1,0 +1,56 @@
+plugins {
+    id 'fabric-loom' version '0.10.+'
+    id 'io.github.juuxel.loom-quiltflower-mini' version '1.2.1'
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+version = project.mod_version
+group = project.maven_group
+
+repositories {
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
+}
+
+dependencies {
+    // To change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    // Fabric API
+    include modImplementation(fabricApi.module("fabric-object-builder-api-v1", project.fabric_version))
+
+    // Sodium
+    modCompileOnly "maven.modrinth:sodium:${project.sodium_version}"
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filteringCharset 'UTF-8'
+
+    filesMatching('fabric.mod.json') {
+        expand 'version': project.version
+    }
+}
+
+tasks.withType(JavaCompile) {
+    it.options.encoding = 'UTF-8'
+}
+
+java {
+    withSourcesJar()
+}
+
+jar {
+    from('LICENSE') {
+        rename { "${it}_${project.archivesBaseName}"}
+    }
+}

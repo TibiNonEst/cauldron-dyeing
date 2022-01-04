@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "cauldron_dyeing",
+  "version": "${version}",
+  "name": "Cauldron Dyeing",
+  "description": "Bring Bedrock's cauldron-based armor dyeing to Java Edition.",
+  "authors": [
+    "TibiNonEst"
+  ],
+  "contact": {
+    "sources": "https://github.com/TibiNonEst/cauldron-dyeing",
+    "issues": "https://github.com/TibiNonEst/cauldron-dyeing/issues"
+  },
+  "license": "LGPL-3.0-only",
+  "icon": "assets/cauldron_dyeing/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.tibinonest.mods.cauldron_dyeing.CauldronDyeing"
+    ]
+  },
+  "mixins": [
+    "cauldron-dyeing.mixins.json",
+    "cauldron-dyeing.compat.sodium.mixins.json"
+  ],
+  "depends": {
+    "minecraft": ">=1.18",
+    "fabricloader": ">=0.12.12",
+    "fabric-object-builder-api-v1": ">=0.1"
+  }
+}
