@@ -18,4 +18,4 @@ Right-clicking on an un-dyed water cauldron with a dyed item to remove its color
 Building the mod requires JDK 17+ on your system. To build, simply run `./gradlew build` and the artifacts will be available in `build/libs`.
 
 ### License
-Cauldron Dyeing is licensed under the GNU LGPLv3, see the [full license](https://github.com/TibiNonEst/cauldron-dyeing/LICENSE).
+Cauldron Dyeing is licensed under the GNU LGPLv3, see the [full license](https://github.com/TibiNonEst/cauldron-dyeing/blob/main/LICENSE).
