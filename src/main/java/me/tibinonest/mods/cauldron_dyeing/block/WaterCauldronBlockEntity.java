@@ -50,7 +50,7 @@ public class WaterCauldronBlockEntity extends BlockEntity {
     }
 
     public boolean hasColor() {
-        return color[0] != -1 && color[1] != -1 && color[2] != -1;
+        return color.length == 3 && color[0] != -1 && color[1] != -1 && color[2] != -1;
     }
 
     public int getColor() {
