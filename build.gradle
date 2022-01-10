@@ -19,6 +19,15 @@ repositories {
     }
 }
 
+var apiModules = [
+        "fabric-api-base",
+        "fabric-tool-attribute-api-v1",
+        "fabric-mining-level-api-v1",
+        "fabric-resource-loader-v0",
+        "fabric-tag-extensions-v0",
+        "fabric-object-builder-api-v1"
+]
+
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -26,7 +35,9 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Fabric API
-    include modImplementation(fabricApi.module("fabric-object-builder-api-v1", project.fabric_version))
+    apiModules.forEach {
+        include modImplementation(fabricApi.module(it, project.fabric_version))
+    }
 
     // Sodium
     modCompileOnly "maven.modrinth:sodium:${project.sodium_version}"
