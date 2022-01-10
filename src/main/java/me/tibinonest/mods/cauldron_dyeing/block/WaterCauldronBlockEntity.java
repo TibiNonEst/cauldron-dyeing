@@ -29,21 +29,23 @@ public class WaterCauldronBlockEntity extends BlockEntity {
         newColor[1] = (int) (colorComponents[1] * 255.0f);
         newColor[2] = (int) (colorComponents[2] * 255.0f);
 
-        var workingColor = hasColor() ? color : new int[]{0, 0, 0};
+        if (hasColor()) {
+            var avgColor = new int[3];
+            avgColor[0] = (color[0] + newColor[0]) / 2;
+            avgColor[1] = (color[1] + newColor[1]) / 2;
+            avgColor[2] = (color[2] + newColor[2]) / 2;
 
-        var avgColor = new int[3];
-        avgColor[0] = (workingColor[0] + newColor[0]) / 2;
-        avgColor[1] = (workingColor[1] + newColor[1]) / 2;
-        avgColor[2] = (workingColor[2] + newColor[2]) / 2;
+            var avgMax = (Ints.max(color) + Ints.max(newColor)) / 2.0f;
 
-        var avgMax = (Ints.max(workingColor) + Ints.max(newColor)) / 2.0f;
+            var maxOfAvg = (float) Ints.max(avgColor);
+            var gainFactor = avgMax / maxOfAvg;
 
-        var maxOfAvg = (float) Ints.max(avgColor);
-        var gainFactor = avgMax / maxOfAvg;
-
-        color[0] = (int) (avgColor[0] * gainFactor);
-        color[1] = (int) (avgColor[1] * gainFactor);
-        color[2] = (int) (avgColor[2] * gainFactor);
+            color[0] = (int) (avgColor[0] * gainFactor);
+            color[1] = (int) (avgColor[1] * gainFactor);
+            color[2] = (int) (avgColor[2] * gainFactor);
+        } else {
+            color = newColor;
+        }
 
         markDirty();
         rebuildBlock();
