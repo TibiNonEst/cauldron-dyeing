@@ -15,11 +15,7 @@ import net.minecraft.util.registry.Registry;
 public class CauldronDyeing implements ModInitializer {
     public static final String MOD_ID = "cauldron_dyeing";
 
-    public static BlockEntityType<WaterCauldronBlockEntity> WATER_CAULDRON_BLOCK_ENTITY;
-
-    static {
-        WATER_CAULDRON_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(WaterCauldronBlockEntity::new, Blocks.WATER_CAULDRON).build();
-    }
+    public static BlockEntityType<WaterCauldronBlockEntity> WATER_CAULDRON_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(WaterCauldronBlockEntity::new, Blocks.WATER_CAULDRON).build();
 
     @Override
     public void onInitialize() {
