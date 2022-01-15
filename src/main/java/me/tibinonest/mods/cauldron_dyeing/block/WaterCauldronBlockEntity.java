@@ -8,6 +8,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
@@ -48,7 +49,6 @@ public class WaterCauldronBlockEntity extends BlockEntity {
         }
 
         markDirty();
-        rebuildBlock();
     }
 
     public boolean hasColor() {
@@ -61,13 +61,7 @@ public class WaterCauldronBlockEntity extends BlockEntity {
 
     public void resetColor() {
         color = new int[]{-1, -1, -1};
-        rebuildBlock();
-    }
-
-    public void rebuildBlock() {
-        if (world != null && world.isClient) {
-            CauldronDyeing.rebuildBlock(pos);
-        }
+        markDirty();
     }
 
     @Override
@@ -80,6 +74,7 @@ public class WaterCauldronBlockEntity extends BlockEntity {
     public void readNbt(NbtCompound tag) {
         super.readNbt(tag);
         color = tag.getIntArray("color");
+        markDirty();
     }
 
     @Override
@@ -93,5 +88,17 @@ public class WaterCauldronBlockEntity extends BlockEntity {
     @Override
     public Packet<ClientPlayPacketListener> toUpdatePacket() {
         return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public void markDirty() {
+        if (world != null) {
+            if (world.isClient()) {
+                CauldronDyeing.rebuildBlock(pos);
+            } else {
+                ((ServerWorld) world).getChunkManager().markForUpdate(pos);
+            }
+            super.markDirty();
+        }
     }
 }
