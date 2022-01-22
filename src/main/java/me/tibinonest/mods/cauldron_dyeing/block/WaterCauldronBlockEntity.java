@@ -2,18 +2,14 @@ package me.tibinonest.mods.cauldron_dyeing.block;
 
 import com.google.common.primitives.Ints;
 import me.tibinonest.mods.cauldron_dyeing.CauldronDyeing;
+import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.Packet;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.Nullable;
 
-public class WaterCauldronBlockEntity extends BlockEntity {
+public class WaterCauldronBlockEntity extends BlockEntity implements BlockEntityClientSerializable {
     private int[] color;
 
     public WaterCauldronBlockEntity(BlockPos pos, BlockState state) {
@@ -65,9 +61,10 @@ public class WaterCauldronBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void writeNbt(NbtCompound tag) {
+    public NbtCompound writeNbt(NbtCompound tag) {
         super.writeNbt(tag);
         tag.putIntArray("color", color);
+        return tag;
     }
 
     @Override
@@ -78,16 +75,14 @@ public class WaterCauldronBlockEntity extends BlockEntity {
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        var nbt = new NbtCompound();
-        nbt.putIntArray("color", color);
-        return nbt;
+    public void fromClientTag(NbtCompound tag) {
+        color = tag.getIntArray("color");
     }
 
-    @Nullable
     @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
+    public NbtCompound toClientTag(NbtCompound tag) {
+        tag.putIntArray("color", color);
+        return tag;
     }
 
     @Override
@@ -96,7 +91,7 @@ public class WaterCauldronBlockEntity extends BlockEntity {
             if (world.isClient()) {
                 CauldronDyeing.rebuildBlock(pos);
             } else {
-                ((ServerWorld) world).getChunkManager().markForUpdate(pos);
+                sync();
             }
             super.markDirty();
         }

@@ -4,8 +4,8 @@ plugins {
     id 'org.ajoberstar.grgit' version '4.1.0'
 }
 
-sourceCompatibility = '17'
-targetCompatibility = '17'
+sourceCompatibility = '16'
+targetCompatibility = '16'
 
 archivesBaseName = project.archives_base_name
 version = "${project.mod_version}${getVersionMetadata()}"
@@ -27,7 +27,8 @@ var apiModules = [
         "fabric-mining-level-api-v1",
         "fabric-resource-loader-v0",
         "fabric-tag-extensions-v0",
-        "fabric-object-builder-api-v1"
+        "fabric-object-builder-api-v1",
+        "fabric-networking-blockentity-v0"
 ]
 
 dependencies {
