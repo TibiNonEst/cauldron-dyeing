@@ -8,7 +8,7 @@ sourceCompatibility = '17'
 targetCompatibility = '17'
 
 archivesBaseName = project.archives_base_name
-version = "${project.mod_version}${getVersionMetadata()}"
+version = "${project.mod_version}+${getMetadata()}"
 group = project.maven_group
 
 repositories {
@@ -68,16 +68,10 @@ jar {
     }
 }
 
-def getVersionMetadata() {
+def getMetadata() {
     def build_id = System.getenv("GITHUB_RUN_NUMBER")
-    def workflow_id = System.getenv("GITHUB_WORKFLOW")
 
-    // CI builds only
-    if (workflow_id == "build-release") {
-        return "+${project.minecraft_version}"
-    } else if (build_id != null) {
-        return "+build.${build_id}"
-    }
+    def metadata = project.minecraft_version
 
     if (grgit != null) {
         def head = grgit.head()
@@ -88,6 +82,13 @@ def getVersionMetadata() {
             id += "-dirty"
         }
 
-        return "+rev.${id}"
+        metadata += "-${id}"
     }
+
+    // CI builds only
+    if (build_id != null) {
+        metadata += ".${build_id}"
+    }
+
+    return metadata
 }
