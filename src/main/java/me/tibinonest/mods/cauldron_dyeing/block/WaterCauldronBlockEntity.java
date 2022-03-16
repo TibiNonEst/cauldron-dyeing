@@ -79,9 +79,7 @@ public class WaterCauldronBlockEntity extends BlockEntity {
 
     @Override
     public NbtCompound toInitialChunkDataNbt() {
-        var nbt = new NbtCompound();
-        nbt.putIntArray("color", color);
-        return nbt;
+        return createNbt();
     }
 
     @Nullable

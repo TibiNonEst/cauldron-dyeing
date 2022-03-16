@@ -1,7 +1,7 @@
 plugins {
-    id 'fabric-loom' version '0.10.+'
-    id 'io.github.juuxel.loom-quiltflower-mini' version '1.2.1'
-    id 'org.ajoberstar.grgit' version '4.1.0'
+    id 'fabric-loom' version '0.11.+'
+    id 'io.github.juuxel.loom-quiltflower' version '1.6.0'
+    id 'org.ajoberstar.grgit' version '5.0.0'
 }
 
 sourceCompatibility = '17'
@@ -23,11 +23,9 @@ repositories {
 
 var apiModules = [
         "fabric-api-base",
-        "fabric-tool-attribute-api-v1",
-        "fabric-mining-level-api-v1",
-        "fabric-resource-loader-v0",
-        "fabric-tag-extensions-v0",
-        "fabric-object-builder-api-v1"
+        "fabric-networking-api-v1",
+        "fabric-object-builder-api-v1",
+        "fabric-registry-sync-v0",
 ]
 
 dependencies {

@@ -3,9 +3,9 @@
   "required": true,
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "BlocksMixin",
     "CauldronBehaviorMixin",
-    "DyeItemAccessor"
+    "DyeItemAccessor",
+    "LeveledCauldronBlockMixin"
   ],
   "client": [
     "BiomeColorsMixin"
