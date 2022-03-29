@@ -25,7 +25,7 @@ import java.util.Map;
 
 @Mixin(CauldronBehavior.class)
 public interface CauldronBehaviorMixin {
-    @Inject(method = "m_ducbhfos", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "method_32209", at = @At("HEAD"), cancellable = true)
     private static void injectCleanDyeableItem(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack, CallbackInfoReturnable<ActionResult> cir) {
         var blockEntity = world.getBlockEntity(pos);
         var item = stack.getItem();
@@ -41,7 +41,7 @@ public interface CauldronBehaviorMixin {
         }
     }
 
-    @Inject(method = "m_xrdlazrh", at = @At(value = "TAIL"))
+    @Inject(method = "method_32217", at = @At(value = "TAIL"))
     private static void injectFillWithWater(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack, CallbackInfoReturnable<ActionResult> cir) {
         var blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof WaterCauldronBlockEntity waterCauldron) {
