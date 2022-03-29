@@ -72,10 +72,18 @@ jar {
 
 def getMetadata() {
     def build_id = System.getenv("GITHUB_RUN_NUMBER")
+    def workflow_id = System.getenv("GITHUB_WORKFLOW")
 
     def metadata = project.minecraft_version
 
-    if (grgit != null) {
+    // Release builds only
+    if (workflow_id == "build-release") {
+        return metadata
+    }
+
+    if (build_id != null) {
+        metadata += "-build.${build_id}"
+    } else if (grgit != null) {
         def head = grgit.head()
         def id = head.abbreviatedId
 
@@ -85,11 +93,6 @@ def getMetadata() {
         }
 
         metadata += "-${id}"
-    }
-
-    // CI builds only
-    if (build_id != null) {
-        metadata += ".${build_id}"
     }
 
     return metadata
