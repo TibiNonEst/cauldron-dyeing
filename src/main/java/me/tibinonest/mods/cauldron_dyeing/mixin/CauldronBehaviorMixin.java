@@ -25,6 +25,7 @@ import java.util.Map;
 
 @Mixin(CauldronBehavior.class)
 public interface CauldronBehaviorMixin {
+    @SuppressWarnings("target")
     @Inject(method = "m_ducbhfos(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/util/ActionResult;", at = @At("HEAD"), cancellable = true)
     private static void cauldron_dyeing$injectCleanDyeableItem(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack, CallbackInfoReturnable<ActionResult> cir) {
         var blockEntity = world.getBlockEntity(pos);
@@ -41,6 +42,7 @@ public interface CauldronBehaviorMixin {
         }
     }
 
+    @SuppressWarnings("target")
     @Inject(method = "m_xrdlazrh(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/util/ActionResult;", at = @At(value = "TAIL"))
     private static void cauldron_dyeing$injectFillWithWater(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack, CallbackInfoReturnable<ActionResult> cir) {
         var blockEntity = world.getBlockEntity(pos);
