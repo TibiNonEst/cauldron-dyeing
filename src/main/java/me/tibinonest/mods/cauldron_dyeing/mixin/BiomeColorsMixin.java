@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BiomeColors.class)
 public class BiomeColorsMixin {
     @Inject(method = "getWaterColor", at = @At("HEAD"), cancellable = true)
-    private static void modifyWaterColor(BlockRenderView world, BlockPos pos, CallbackInfoReturnable<Integer> cir) {
+    private static void cauldron_dyeing$modifyWaterColor(BlockRenderView world, BlockPos pos, CallbackInfoReturnable<Integer> cir) {
         var blockEntity = world.getBlockEntity(pos);
 
         if (blockEntity instanceof WaterCauldronBlockEntity waterCauldron && waterCauldron.getColor() != -1) {
