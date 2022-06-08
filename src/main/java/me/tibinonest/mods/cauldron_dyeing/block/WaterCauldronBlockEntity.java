@@ -13,13 +13,14 @@ import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 public class WaterCauldronBlockEntity extends BlockEntity {
-    private final int[] EMPTY_NBT = new int[] {-1, -1, -1};
-    private int[] color;
+    private final int[] NULL_COLOR = new int[] {-1, -1, -1};
+    private int[] color = NULL_COLOR;
 
     public WaterCauldronBlockEntity(BlockPos pos, BlockState state) {
         super(CauldronDyeing.WATER_CAULDRON_BLOCK_ENTITY, pos, state);
-        color = null;
     }
 
     // Formula taken from https://minecraft.fandom.com/wiki/Dye#Dyeing_armor and DyeableItem#blendAndSetColor
@@ -31,7 +32,7 @@ public class WaterCauldronBlockEntity extends BlockEntity {
         newColor[1] = (int) (colorComponents[1] * 255.0f);
         newColor[2] = (int) (colorComponents[2] * 255.0f);
 
-        if (color != null) {
+        if (!Arrays.equals(color, NULL_COLOR)) {
             var avgColor = new int[3];
             avgColor[0] = (color[0] + newColor[0]) / 2;
             avgColor[1] = (color[1] + newColor[1]) / 2;
@@ -53,25 +54,24 @@ public class WaterCauldronBlockEntity extends BlockEntity {
     }
 
     public int getColor() {
-        return color != null ? (color[0] << 16) + (color[1] << 8) + color[2] : -1;
+        return !Arrays.equals(color, NULL_COLOR) ? (color[0] << 16) + (color[1] << 8) + color[2] : -1;
     }
 
     public void resetColor() {
-        color = null;
+        color = NULL_COLOR;
         markDirty();
     }
 
     @Override
     public void writeNbt(NbtCompound tag) {
         super.writeNbt(tag);
-        tag.putIntArray("color", color != null ? color : EMPTY_NBT);
+        tag.putIntArray("color", color);
     }
 
     @Override
     public void readNbt(NbtCompound tag) {
         super.readNbt(tag);
-        var value = tag.getIntArray("color");
-        color = value != EMPTY_NBT ? color : null;
+        color = tag.getIntArray("color");
         markDirty();
     }
 
