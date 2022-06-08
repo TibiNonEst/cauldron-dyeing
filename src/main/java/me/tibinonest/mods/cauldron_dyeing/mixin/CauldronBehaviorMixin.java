@@ -25,8 +25,8 @@ import java.util.Map;
 
 @Mixin(CauldronBehavior.class)
 public interface CauldronBehaviorMixin {
-    @Inject(method = "method_32209", at = @At("HEAD"), cancellable = true)
-    private static void injectCleanDyeableItem(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack, CallbackInfoReturnable<ActionResult> cir) {
+    @Inject(method = "m_ducbhfos(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/util/ActionResult;", at = @At("HEAD"), cancellable = true)
+    private static void cauldron_dyeing$injectCleanDyeableItem(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack, CallbackInfoReturnable<ActionResult> cir) {
         var blockEntity = world.getBlockEntity(pos);
         var item = stack.getItem();
 
@@ -41,8 +41,8 @@ public interface CauldronBehaviorMixin {
         }
     }
 
-    @Inject(method = "method_32217", at = @At(value = "TAIL"))
-    private static void injectFillWithWater(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack, CallbackInfoReturnable<ActionResult> cir) {
+    @Inject(method = "m_xrdlazrh(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/util/ActionResult;", at = @At(value = "TAIL"))
+    private static void cauldron_dyeing$injectFillWithWater(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack, CallbackInfoReturnable<ActionResult> cir) {
         var blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof WaterCauldronBlockEntity waterCauldron) {
             waterCauldron.resetColor();
@@ -50,7 +50,7 @@ public interface CauldronBehaviorMixin {
     }
 
     @Inject(method = "registerBehavior", at = @At("TAIL"))
-    private static void injectRegisterBehavior(CallbackInfo ci) {
+    private static void cauldron_dyeing$injectRegisterBehavior(CallbackInfo ci) {
         var dyeMap = DyeItemAccessor.getDyeMap();
         for (Map.Entry<DyeColor, DyeItem> dyeItem : dyeMap.entrySet()) {
             CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(dyeItem.getValue(), CauldronBehaviorExtended.DYE_WATER);
