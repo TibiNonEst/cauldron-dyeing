@@ -3,6 +3,9 @@ plugins {
     alias(libs.plugins.loom.quiltflower)
     alias(libs.plugins.qmol)
     alias(libs.plugins.grgit)
+    alias(libs.plugins.minotaur)
+    alias(libs.plugins.cursegradle)
+    id "maven-publish"
 }
 
 archivesBaseName = project.archives_base_name
@@ -11,10 +14,10 @@ group = project.maven_group
 
 repositories {
     maven {
-        name = 'Modrinth'
-        url = 'https://api.modrinth.com/maven'
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
         content {
-            includeGroup 'maven.modrinth'
+            includeGroup "maven.modrinth"
         }
     }
 }
@@ -35,16 +38,16 @@ loom {
 }
 
 processResources {
-    inputs.property 'version', project.version
-    filteringCharset 'UTF-8'
+    inputs.property "version", project.version
+    filteringCharset "UTF-8"
 
-    filesMatching('fabric.mod.json') {
-        expand 'version': project.version
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
     }
 }
 
 tasks.withType(JavaCompile) {
-    it.options.encoding = 'UTF-8'
+    it.options.encoding = "UTF-8"
     // Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
     it.options.release = 17
 }
@@ -58,34 +61,79 @@ java {
 }
 
 jar {
-    from('LICENSE') {
+    from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}"}
     }
 }
 
-def getMetadata() {
-    def build_id = System.getenv('GITHUB_RUN_NUMBER')
-    def workflow_id = System.getenv('GITHUB_WORKFLOW')
+modrinth {
+    projectId = "5AgJnN8I"
+    uploadFile = remapJar
+}
+tasks.modrinth.dependsOn remapJar
 
-    def metadata = libs.versions.minecraft.get()
+def ENV = System.getenv()
+curseforge {
+    if (ENV.CURSEFORGE_TOKEN) {
+        apiKey = ENV.CURSEFORGE_TOKEN
+    }
+
+    project {
+        id = "564870"
+        changelog = "No changelog provided"
+        releaseType = "release"
+        addGameVersion libs.versions.minecraft.get()
+        addGameVersion "Fabric"
+        addGameVersion "Quilt"
+
+        mainArtifact(jar) {
+            displayName = "Cauldron Dyeing ${project.mod_version}"
+        }
+    }
+}
+tasks.curseforge.dependsOn remapJar
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            url = ENV.MAVEN_URL
+            credentials {
+                username = ENV.MAVEN_USERNAME
+                password = ENV.MAVEN_PASSWORD
+            }
+        }
+    }
+}
+
+def getMetadata() {
+    def build_id = System.getenv("GITHUB_RUN_NUMBER")
+    def workflow_id = System.getenv("GITHUB_WORKFLOW")
+
+    def metadata = ""
 
     // Release builds only
-    if (workflow_id == 'build-release') {
+    if (workflow_id == "build-release") {
         return metadata
     }
 
     if (build_id != null) {
-        metadata += "-build.${build_id}"
+        metadata += "build.${build_id}"
     } else if (grgit != null) {
         def head = grgit.head()
         def id = head.abbreviatedId
 
         // Flag the build if the build tree is not clean
         if (!grgit.status().clean) {
-            id += '-dirty'
+            id += "-dirty"
         }
 
-        metadata += "-${id}"
+        metadata += "${id}"
     }
 
     return metadata
