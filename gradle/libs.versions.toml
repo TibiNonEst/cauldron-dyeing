@@ -19,5 +19,3 @@ fabric_loom = { id = "fabric-loom", version = "0.12.+" }
 loom_quiltflower = { id = "io.github.juuxel.loom-quiltflower", version = "1.7.+" }
 qmol = { id = "org.quiltmc.quilt-mappings-on-loom", version = "4.2.0" }
 grgit = { id = "org.ajoberstar.grgit", version = "5.+" }
-minotaur = { id = "com.modrinth.minotaur", version = "2.+" }
-cursegradle = { id = "com.matthewprenger.cursegradle", version = "1.+" }

@@ -3,8 +3,6 @@ plugins {
     alias(libs.plugins.loom.quiltflower)
     alias(libs.plugins.qmol)
     alias(libs.plugins.grgit)
-    alias(libs.plugins.minotaur)
-    alias(libs.plugins.cursegradle)
     id "maven-publish"
 }
 
@@ -66,33 +64,6 @@ jar {
     }
 }
 
-modrinth {
-    projectId = "5AgJnN8I"
-    uploadFile = remapJar
-}
-tasks.modrinth.dependsOn remapJar
-
-def ENV = System.getenv()
-curseforge {
-    if (ENV.CURSEFORGE_TOKEN) {
-        apiKey = ENV.CURSEFORGE_TOKEN
-    }
-
-    project {
-        id = "564870"
-        changelog = "No changelog provided"
-        releaseType = "release"
-        addGameVersion libs.versions.minecraft.get()
-        addGameVersion "Fabric"
-        addGameVersion "Quilt"
-
-        mainArtifact(jar) {
-            displayName = "Cauldron Dyeing ${project.mod_version}"
-        }
-    }
-}
-tasks.curseforge.dependsOn remapJar
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -102,10 +73,10 @@ publishing {
 
     repositories {
         maven {
-            url = ENV.MAVEN_URL
+            url = System.getenv("MAVEN_URL")
             credentials {
-                username = ENV.MAVEN_USERNAME
-                password = ENV.MAVEN_PASSWORD
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
             }
         }
     }
