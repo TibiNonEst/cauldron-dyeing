@@ -30,6 +30,10 @@ dependencies {
     modCompileOnly libs.sodium
 }
 
+loom {
+    accessWidenerPath.set file("src/main/resources/cauldron-dyeing.accesswidener")
+}
+
 processResources {
     inputs.property 'version', project.version
     filteringCharset 'UTF-8'

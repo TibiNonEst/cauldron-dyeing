@@ -19,6 +19,7 @@
       "me.tibinonest.mods.cauldron_dyeing.CauldronDyeing"
     ]
   },
+  "accessWidener": "cauldron-dyeing.accesswidener",
   "mixins": [
     "cauldron-dyeing.mixins.json"
   ],

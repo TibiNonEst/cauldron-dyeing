@@ -53,8 +53,7 @@ public interface CauldronBehaviorMixin {
 
     @Inject(method = "registerBehavior", at = @At("TAIL"))
     private static void cauldron_dyeing$injectRegisterBehavior(CallbackInfo ci) {
-        var dyeMap = DyeItemAccessor.getDyeMap();
-        for (Map.Entry<DyeColor, DyeItem> dyeItem : dyeMap.entrySet()) {
+        for (Map.Entry<DyeColor, DyeItem> dyeItem : DyeItem.DYES.entrySet()) {
             CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(dyeItem.getValue(), CauldronBehaviorExtended.DYE_WATER);
         }
     }
