@@ -32,7 +32,7 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
       - name: Build and publish with Gradle
-        run: ./gradlew build publish modrinth curseforge
+        run: ./gradlew build modrinth curseforge
         env:
           MAVEN_URL: ${{ secrets.MAVEN_URL }}
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
