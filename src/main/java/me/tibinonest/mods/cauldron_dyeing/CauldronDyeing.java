@@ -8,18 +8,19 @@ import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityT
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 
 public class CauldronDyeing implements ModInitializer {
     public static final String MOD_ID = "cauldron_dyeing";
 
-    public static BlockEntityType<WaterCauldronBlockEntity> WATER_CAULDRON_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(WaterCauldronBlockEntity::new, Blocks.WATER_CAULDRON).build();
+    public static final BlockEntityType<WaterCauldronBlockEntity> WATER_CAULDRON_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(WaterCauldronBlockEntity::new, Blocks.WATER_CAULDRON).build();
 
     @Override
     public void onInitialize() {
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "water_cauldron_entity"), WATER_CAULDRON_BLOCK_ENTITY);
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "water_cauldron_entity"), WATER_CAULDRON_BLOCK_ENTITY);
     }
 
     @Environment(EnvType.CLIENT)

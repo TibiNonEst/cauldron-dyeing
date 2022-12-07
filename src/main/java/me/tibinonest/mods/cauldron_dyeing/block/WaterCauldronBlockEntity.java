@@ -76,7 +76,7 @@ public class WaterCauldronBlockEntity extends BlockEntity {
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
+    public NbtCompound toSyncedNbt() {
         return toNbt();
     }
 
