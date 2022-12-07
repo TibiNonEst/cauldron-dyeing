@@ -6,7 +6,7 @@ plugins {
 }
 
 archivesBaseName = project.archives_base_name
-version = "${project.mod_version}+${getMetadata()}"
+version = "${project.mod_version}${getMetadata()}"
 group = project.maven_group
 
 repositories {
@@ -96,7 +96,7 @@ def getMetadata() {
     }
 
     if (build_id != null) {
-        metadata += "build.${build_id}"
+        metadata += "+build.${build_id}"
     } else if (grgit != null) {
         def head = grgit.head()
         def id = head.abbreviatedId
@@ -106,7 +106,7 @@ def getMetadata() {
             id += "-dirty"
         }
 
-        metadata += "${id}"
+        metadata += "+${id}"
     }
 
     return metadata
