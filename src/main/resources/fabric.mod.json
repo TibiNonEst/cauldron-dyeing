@@ -24,7 +24,7 @@
     "cauldron-dyeing.mixins.json"
   ],
   "depends": {
-    "minecraft": ">=1.18",
+    "minecraft": ">=1.19.3",
     "fabricloader": ">=0.12.0",
     "fabric-object-builder-api-v1": ">=0.1"
   },
