@@ -91,7 +91,7 @@ public class WaterCauldronBlockEntity extends BlockEntity {
         if (world != null) {
             if (world.isClient()) {
                 CauldronDyeing.rebuildBlock(pos);
-            } else {
+            } else if (world instanceof ServerWorld) {
                 ((ServerWorld) world).getChunkManager().markForUpdate(pos);
             }
             super.markDirty();
