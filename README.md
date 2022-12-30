@@ -1,6 +1,6 @@
 # Cauldron Dyeing
 ![GitHub license](https://img.shields.io/github/license/tibinonest/cauldron-dyeing)
-![GitHub actions](https://img.shields.io/github/workflow/status/tibinonest/cauldron-dyeing/gradle-ci)
+![GitHub actions](https://img.shields.io/github/actions/workflow/status/tibinonest/cauldron-dyeing/build-gradle.yml?branch=1.19.3)
 ![GitHub release](https://img.shields.io/github/v/release/tibinonest/cauldron-dyeing?display_name=tag&include_prereleases&sort=semver)
 
 Bring Bedrock's cauldron-based armor dyeing to Java Edition.
