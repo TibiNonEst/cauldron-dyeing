@@ -29,6 +29,6 @@
     "fabric-object-builder-api-v1": ">=0.1"
   },
   "breaks": {
-    "sodium": "<0.4.1"
+    "sodium": "<0.4.9"
   }
 }
