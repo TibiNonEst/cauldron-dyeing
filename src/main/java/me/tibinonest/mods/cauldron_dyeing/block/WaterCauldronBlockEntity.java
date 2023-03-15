@@ -5,7 +5,7 @@ import me.tibinonest.mods.cauldron_dyeing.CauldronDyeing;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.Packet;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.world.ServerWorld;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 
 public class WaterCauldronBlockEntity extends BlockEntity {
-    private final int[] NULL_COLOR = new int[] {-1, -1, -1};
+    private static final int[] NULL_COLOR = new int[] {-1, -1, -1};
     private int[] color = NULL_COLOR;
 
     public WaterCauldronBlockEntity(BlockPos pos, BlockState state) {
