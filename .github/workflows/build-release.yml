@@ -39,19 +39,14 @@ jobs:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
-      - name: Upload artifacts to Modrinth, Curseforge and GitHub
-        uses: Kir-Antipov/mc-publish@v3.1
+      - name: Upload artifacts to Modrinth and GitHub
+        uses: Kir-Antipov/mc-publish@v3
         with:
           modrinth-id: 5AgJnN8I
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-
-          curseforge-id: 564870
-          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
           files: build/libs/!(*-sources).jar
 
-          loaders: |
-            fabric
-            quilt
+          loaders: fabric quilt
