@@ -1,10 +1,10 @@
 [versions]
-minecraft = "1.19.4"
-quilt_mappings = "1.19.4+build.3"
-fabric_loader = "0.14.17"
+minecraft = "1.20"
+quilt_mappings = "1.20+build.1"
+fabric_loader = "0.14.21"
 
-fabric_api = "0.75.3+1.19.4"
-sodium = "mc1.19.4-0.4.10"
+fabric_api = "0.83.0+1.20"
+sodium = "mc1.20-0.4.10"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
@@ -15,6 +15,6 @@ fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fab
 sodium = { module = "maven.modrinth:sodium", version.ref = "sodium" }
 
 [plugins]
-fabric_loom = { id = "fabric-loom", version = "1.1.+" }
-loom_quiltflower = { id = "io.github.juuxel.loom-quiltflower", version = "1.8.+" }
-grgit = { id = "org.ajoberstar.grgit", version = "5.0.+" }
+fabric_loom = { id = "fabric-loom", version = "1.2.+" }
+loom_quiltflower = { id = "io.github.juuxel.loom-quiltflower", version = "1.10.+" }
+grgit = { id = "org.ajoberstar.grgit", version = "5.2.+" }
