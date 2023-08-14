@@ -106,7 +106,7 @@ def getMetadata() {
             id += "-dirty"
         }
 
-        metadata += "+${id}"
+        metadata += "+git.${id}"
     }
 
     return metadata

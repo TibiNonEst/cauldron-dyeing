@@ -7,8 +7,8 @@
     "CauldronBehaviorMixin"
   ],
   "client": [
-    "BiomeColorsMixin",
-    "sodium.SodiumBlockRendererMixin"
+    "BlockColorsMixin",
+    "sodium.ColorProviderRegistryMixin"
   ],
   "injectors": {
     "defaultRequire": 1
