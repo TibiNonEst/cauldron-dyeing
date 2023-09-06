@@ -11,14 +11,6 @@ group = project.maven_group
 
 repositories {
     maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
-        content {
-            includeGroup "maven.modrinth"
-        }
-    }
-
-    maven {
         name = "Quilt"
         url = "https://maven.quiltmc.org/repository/release"
     }
@@ -30,7 +22,6 @@ dependencies {
     modImplementation libs.fabric.loader
 
     modImplementation libs.fabric.api
-    modCompileOnly libs.sodium
 }
 
 loom {

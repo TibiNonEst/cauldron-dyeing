@@ -1,9 +1,9 @@
 package me.tibinonest.mods.cauldron_dyeing.mixin;
 
 import me.tibinonest.mods.cauldron_dyeing.block.WaterCauldronBlockEntity;
-import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.cauldron.AbstractCauldronBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;

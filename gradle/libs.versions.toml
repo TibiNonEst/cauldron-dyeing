@@ -1,10 +1,9 @@
 [versions]
 minecraft = "1.20.1"
-quilt_mappings = "1.20.1+build.14"
+quilt_mappings = "1.20.1+build.23"
 fabric_loader = "0.14.22"
 
-fabric_api = "0.87.0+1.20.1"
-sodium = "mc1.20.1-0.5.1"
+fabric_api = "0.88.1+1.20.1"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
@@ -12,7 +11,6 @@ quilt_mappings = { module = "org.quiltmc:quilt-mappings", version.ref = "quilt_m
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
 
 fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
-sodium = { module = "maven.modrinth:sodium", version.ref = "sodium" }
 
 [plugins]
 fabric_loom = { id = "fabric-loom", version = "1.2.+" }

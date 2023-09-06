@@ -1,5 +1,5 @@
 accessWidener v1 named
 
-accessible method net/minecraft/block/AbstractCauldronBlock canBeFilledByDripstone (Lnet/minecraft/fluid/Fluid;)Z
+accessible method net/minecraft/block/cauldron/AbstractCauldronBlock canBeFilledByDripstone (Lnet/minecraft/fluid/Fluid;)Z
 
 accessible field net/minecraft/item/DyeItem DYES Ljava/util/Map;
