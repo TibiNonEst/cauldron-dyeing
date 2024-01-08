@@ -43,7 +43,7 @@ public interface CauldronBehaviorMixin {
     }
 
     @SuppressWarnings("target")
-    @Inject(method = "method_32217", at = @At(value = "TAIL"))
+    @Inject(method = "method_32217", at = @At("TAIL"))
     private static void cauldron_dyeing$injectFillWithWater(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, ItemStack stack, CallbackInfoReturnable<ActionResult> cir) {
         var blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof WaterCauldronBlockEntity waterCauldron) {
@@ -54,7 +54,7 @@ public interface CauldronBehaviorMixin {
     @Inject(method = "registerBehavior", at = @At("TAIL"))
     private static void cauldron_dyeing$injectRegisterBehavior(CallbackInfo ci) {
         for (Map.Entry<DyeColor, DyeItem> dyeItem : DyeItem.DYES.entrySet()) {
-            CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(dyeItem.getValue(), CauldronBehaviorExtended.DYE_WATER);
+            CauldronBehavior.WATER_CAULDRON_BEHAVIOR.map().put(dyeItem.getValue(), CauldronBehaviorExtended.DYE_WATER);
         }
     }
 }

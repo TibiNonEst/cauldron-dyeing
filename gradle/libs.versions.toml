@@ -1,9 +1,12 @@
 [versions]
-minecraft = "1.20.1"
-quilt_mappings = "1.20.1+build.23"
-fabric_loader = "0.14.22"
+minecraft = "1.20.3"
+quilt_mappings = "1.20.3+build.3"
+fabric_loader = "0.15.3"
 
-fabric_api = "0.88.1+1.20.1"
+fabric_api = "0.91.1+1.20.3"
+
+fabric_loom = "1.4.+"
+grgit = "5.2.+"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
@@ -13,6 +16,5 @@ fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_l
 fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
 
 [plugins]
-fabric_loom = { id = "fabric-loom", version = "1.2.+" }
-loom_quiltflower = { id = "io.github.juuxel.loom-vineflower", version = "1.11.+" }
-grgit = { id = "org.ajoberstar.grgit", version = "5.2.+" }
+fabric_loom = { id = "fabric-loom", version.ref = "fabric_loom" }
+grgit = { id = "org.ajoberstar.grgit", version.ref = "grgit" }

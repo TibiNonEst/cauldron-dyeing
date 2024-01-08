@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.fabric.loom)
-    alias(libs.plugins.loom.quiltflower)
     alias(libs.plugins.grgit)
     id "maven-publish"
 }
